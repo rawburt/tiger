@@ -1,0 +1,7 @@
+(library
+ (name tiger)
+ (modules absyn symbol lexer parser types env semant translate parse))
+
+(ocamllex lexer)
+
+(menhir (modules parser))

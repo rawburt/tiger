@@ -1,0 +1,9 @@
+/* error : break must be in a loop */
+/* author : robert */
+
+let
+    var i:int := 1
+in
+    while i < 10 do (i := i + 1;break);
+    break
+end
