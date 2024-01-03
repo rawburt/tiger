@@ -41,6 +41,7 @@ let base_venv : venv =
   in
   List.fold_left add_function Symbol.empty functions
 
+(* for debugging *)
 let string_of_tenv (tenv:tenv) : string =
   let show_tenv_entry (name, ty) =
     Printf.sprintf "[%s] %s" (Symbol.name name) (string_of_ty ty)
