@@ -31,9 +31,3 @@ let rec string_of_ty = function
     match !refopt with
     | None -> "NAME " ^ Symbol.name symbol ^ ", ref None"
     | Some _ -> "NAME " ^ Symbol.name symbol ^ ", ref Some"
-
-
-let rec string_of_ty_list = function
-  | [] -> ""
-  | [t] -> string_of_ty t
-  | t :: ts -> string_of_ty t ^ ", " ^ string_of_ty_list ts
