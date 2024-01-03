@@ -59,13 +59,13 @@ and ty =
   | ArrayTy of symbol * pos
 
 let rec string_of_var = function
-| SimpleVar (symbol, _) -> Symbol.name symbol
-| FieldVar (var, symbol, _) ->
-  let parent = string_of_var var in
-  parent ^ "." ^ Symbol.name symbol
-| SubscriptVar (var, _, _) ->
-  let parent = string_of_var var in
-  parent ^ "[]"
+  | SimpleVar (symbol, _) -> Symbol.name symbol
+  | FieldVar (var, symbol, _) ->
+    let parent = string_of_var var in
+    parent ^ "." ^ Symbol.name symbol
+  | SubscriptVar (var, _, _) ->
+    let parent = string_of_var var in
+    parent ^ "[]"
 
 let string_of_oper = function
   | PlusOp -> "+"
