@@ -42,11 +42,4 @@ let base_venv : venv =
   List.fold_left add_function Symbol.empty functions
 
 (* for debugging *)
-let string_of_tenv (tenv:tenv) : string =
-  let show_tenv_entry (name, ty) =
-    Printf.sprintf "[%s] %s" (Symbol.name name) (string_of_ty ty)
-  in
-  Symbol.Tbl.to_seq tenv
-  |> List.of_seq
-  |> List.map show_tenv_entry
-  |> String.concat "\n"
+let string_of_tenv (tenv:tenv) : string = Symbol.string_of_table tenv string_of_ty
