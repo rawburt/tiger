@@ -7,6 +7,7 @@ let () =
     exit 1
   | Ok exp ->
     try
+      let _ = Tiger.Find_escape.find_escape exp in
       let _ = Tiger.Semant.trans_prog exp in
       ()
     with
@@ -17,4 +18,7 @@ let () =
         | Some p -> "\n" ^ loc p
       in
       print_endline ("Error: " ^ msg ^ pos_str);
+      exit 1
+    | Tiger.Find_escape.Error (msg, pos) ->
+      print_endline ("Error: " ^ msg ^ "\n" ^ loc pos);
       exit 1

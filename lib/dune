@@ -1,7 +1,16 @@
 (library
  (name tiger)
- (modules absyn symbol lexer parser types env semant translate parse))
+ (modules
+  absyn symbol lexer
+  parser types env
+  semant translate parse
+  temp frame find_escape))
 
 (ocamllex lexer)
 
 (menhir (modules parser))
+
+; temp fix for unused fields in frame.ml
+(env
+  (dev
+    (flags (:standard -w -69))))

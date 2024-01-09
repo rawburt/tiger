@@ -1,8 +1,16 @@
 open Types
 
 type enventry =
-  | VarEntry of { ty: ty }
-  | FunEntry of { formals: ty list; result: ty }
+  | VarEntry of {
+    access: Translate.access;
+    ty: ty
+  }
+  | FunEntry of {
+    level: Translate.level;
+    label: Temp.label;
+    formals: ty list;
+    result: ty
+  }
 
 type tenv = ty Symbol.table
 type venv = enventry Symbol.table
@@ -37,9 +45,18 @@ let base_venv : venv =
     ]
   in
   let add_function venv (name, formals, result) =
-    Symbol.enter venv (Symbol.symbol name) (FunEntry { formals; result })
+    let entry =
+      FunEntry {
+        formals;
+        result;
+        level = Translate.outermost;
+        label = Temp.newlabel ();
+      }
+    in
+    Symbol.enter venv (Symbol.symbol name) entry
   in
   List.fold_left add_function Symbol.empty functions
 
 (* for debugging *)
-let string_of_tenv (tenv:tenv) : string = Symbol.string_of_table tenv string_of_ty
+let string_of_tenv (tenv:tenv) : string =
+  Symbol.string_of_table tenv string_of_ty
